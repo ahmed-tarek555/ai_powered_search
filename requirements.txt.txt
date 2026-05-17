@@ -1,0 +1,9 @@
+fastapi==0.95.2
+starlette==0.27.0
+uvicorn
+sqlalchemy
+requests
+jinja2==3.0.3
+psycopg2
+python-multipart
+python-dotenv
