@@ -7,3 +7,7 @@ jinja2==3.0.3
 psycopg2
 python-multipart
 python-dotenv
+pgvector
+sentence_transformers
+pydantic
+numpy

@@ -2,8 +2,28 @@ version: "3.9"
 
 services:
 
+  db:
+    image: postgres:15
+    container_name: search_products_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: search_products_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   app:
     build: .
     container_name: ai_powered_search
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:admin@db:5432/products_db
     ports:
       - "8000:8000"
+
+volumes:
+  postgres_data:
