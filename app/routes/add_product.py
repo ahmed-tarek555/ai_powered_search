@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from app.schemas.product import ProductCreate
@@ -8,10 +8,10 @@ from app.config import BASE_DIR
 from app.models.embedder import get_embedding
 
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
-router = APIRouter(prefix="/product")
+router = APIRouter(prefix="/products")
 
 @router.post("/add_product")
-def create_receipt(product: ProductCreate, db: Session = Depends(get_db)):
+def add_product(product: ProductCreate, db: Session = Depends(get_db)):
 
     embedding = get_embedding(ProductCreate.description)
     new_product = Product(
@@ -28,3 +28,7 @@ def create_receipt(product: ProductCreate, db: Session = Depends(get_db)):
     return {
         "id": new_product.id,
     }
+
+@router.get("/")
+async def get_page(request: Request):
+    return templates.TemplateResponse("dashboard.html", {"request": request})
