@@ -124,15 +124,14 @@
                 resultsDiv.innerHTML = "";
 
                 results.forEach(item => {
-                    const doc = item.doc;
 
                     const card = document.createElement("div");
                     card.className = "card";
 
                     card.innerHTML = `
-                        <div class="name">${doc.name}</div>
-                        <div class="description">${doc.description}</div>
-                        <div class="meta">Similarity: ${doc.similarity.toFixed(2)}</div>
+                        <div class="name">${item.name}</div>
+                        <div class="description">${item.description}</div>
+                        <div class="meta">Similarity: ${item.similarity}</div>
                     `;
 
                     resultsDiv.appendChild(card);
