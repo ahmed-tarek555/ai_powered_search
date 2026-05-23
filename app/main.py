@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from app.database import engine, Base
 from app.config import BASE_DIR
 from app.db_models import product
-from app.routes import add_product
+from app.routes import add_product, search
 
 load_dotenv()
 
@@ -29,8 +29,9 @@ app.add_middleware(
 )
 
 app.include_router(add_product.router)
+app.include_router(search.router)
 
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("idex.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})

@@ -13,8 +13,9 @@ def search(query: str, documents: list):
         sim = cosine_similarity(query_embedding, doc["embedding"])
 
         results.append({
-            "doc": doc,
-            "similarity": sim
+            "name": doc["name"],
+            "description": doc["description"],
+            "similarity": float(sim)
         })
 
     results = sorted(results, key=lambda x: x["similarity"], reverse=True)

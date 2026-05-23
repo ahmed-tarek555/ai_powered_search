@@ -146,20 +146,6 @@
             opacity: 1;
         }
 
-        select {
-            padding-right: 42px;
-            background-image:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 100%),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23e2e8f0' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-            background-size: 10px 6px, auto;
-            background-position: right 16px center, right 14px center;
-            background-repeat: no-repeat, no-repeat;
-        }
-
-        input[type='number'] {
-            -moz-appearance: textfield;
-        }
-
         input::-webkit-inner-spin-button,
         input::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -281,7 +267,7 @@
                     </div>
                     <div class="form-group">
                         <label for="quantity">category</label>
-                        <input type="number" id="quantity" name="category" step="1" min="0" placeholder="0" required />
+                        <input type="text" id="quantity" name="category" placeholder="Enter category" required />
                     </div>
                 </div>
 
@@ -293,13 +279,8 @@
 
 
     <script>
-        function formatCurrency(value) {
-            return parseFloat(value || 0).toFixed(2);
-        }
-
         async function submitReceiptForm(event) {
             event.preventDefault();
-            setDescriptionValue();
 
             const form = event.target;
             const data = {
@@ -320,42 +301,10 @@
                 alert('Product added successfully!');
                 form.reset();
             } catch (error) {
-                console.error('Failed to submit the form to the backend:', error);
+                alert('Failed to submit the form to the backend');
             }
         }
-
-        function calculateTotals() {
-            const unitPrice = parseFloat(document.getElementById('unit-price').value) || 0;
-            const quantity = parseFloat(document.getElementById('quantity').value) || 0;
-            const discount = parseFloat(document.getElementById('discount').value) || 0;
-            const vatRate = 14;
-
-            const total = unitPrice * quantity;
-            const vatAmount = total * (vatRate / 100);
-            const finalTotal = vatAmount + total - discount;
-
-            document.getElementById('total').value = formatCurrency(total);
-            document.getElementById('vat-rate').value = vatRate;
-            document.getElementById('vat-amount').value = formatCurrency(vatAmount);
-            document.getElementById('final-total').value = formatCurrency(finalTotal >= 0 ? finalTotal : 0);
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('receipt-date').value = today;
-
-            // Load cloned data from localStorage if it exists
-            loadFromLocalStorage();
-
-            ['unit-price', 'quantity', 'discount'].forEach(function (id) {
-                document.getElementById(id).addEventListener('input', calculateTotals);
-            });
-
-            document.getElementById('description-category').addEventListener('change', updateDescriptionOptions);
-            document.getElementById('receipt-form').addEventListener('submit', submitReceiptForm);
-            document.getElementById('pasteBtn').addEventListener('click', loadFromLocalStorage);
-            calculateTotals();
-        });
+        document.getElementById('receipt-form').addEventListener('submit', submitReceiptForm);
     </script>
 </body>
 </html>

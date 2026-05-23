@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   db:
-    image: postgres:15
+    image: pgvector/pgvector:pg15
     container_name: search_products_db
     restart: always
     environment:
@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:admin@db:5432/products_db
+      DATABASE_URL: postgresql://postgres:admin@db:5432/search_products_db
     ports:
       - "8000:8000"
 

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            background-color: #1e1e1e;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2a2a2a;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3a3a3a;
+        }
+
+        .results {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card {
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .similarity {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <h2><a href="/products">add product</a></h2>
+        <form id="searchForm">
+            <input id="searchInput" type="text" placeholder="Search..." required />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="results" id="results"></div>
+
+    <script>
+        const form = document.getElementById("searchForm");
+        const input = document.getElementById("searchInput");
+        const resultsDiv = document.getElementById("results");
+
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const query = input.value;
+            resultsDiv.innerHTML = "Loading...";
+
+            try {
+                const res = await fetch("/search", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ query })
+                });
+
+                const results = await res.json();
+
+                resultsDiv.innerHTML = "";
+
+                results.forEach(item => {
+                    const doc = item.doc;
+
+                    const card = document.createElement("div");
+                    card.className = "card";
+
+                    card.innerHTML = `
+                        <div class="name">${doc.name}</div>
+                        <div class="description">${doc.description}</div>
+                        <div class="meta">Similarity: ${doc.similarity.toFixed(2)}</div>
+                    `;
+
+                    resultsDiv.appendChild(card);
+                });
+
+            } catch (err) {
+                resultsDiv.innerHTML = "Error fetching results";
+                console.error(err);
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -13,7 +13,7 @@ router = APIRouter(prefix="/products")
 @router.post("/add_product")
 def add_product(product: ProductCreate, db: Session = Depends(get_db)):
 
-    embedding = get_embedding(ProductCreate.description)
+    embedding = get_embedding(product.description)
     new_product = Product(
         name=product.name,
         description=product.description,
@@ -31,4 +31,4 @@ def add_product(product: ProductCreate, db: Session = Depends(get_db)):
 
 @router.get("/")
 async def get_page(request: Request):
-    return templates.TemplateResponse("dashboard.html", {"request": request})
+    return templates.TemplateResponse("add_product.html", {"request": request})
