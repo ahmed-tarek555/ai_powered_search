@@ -20,9 +20,31 @@
             max-width: 500px;
         }
 
+        /* ✅ FIXED LINK STYLE */
+        a {
+            text-decoration: none;
+            color: #ddd;
+            background-color: #1e1e1e;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #2a2a2a;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            background-color: #2a2a2a;
+            color: #fff;
+        }
+
+        a:visited {
+            color: #ddd;
+        }
+
         form {
             display: flex;
             gap: 10px;
+            margin-top: 15px;
         }
 
         input {
@@ -90,7 +112,8 @@
 <body>
 
     <div class="search-container">
-        <h2><a href="/products">add product</a></h2>
+        <h2><a href="/products">Add Product</a></h2>
+
         <form id="searchForm">
             <input id="searchInput" type="text" placeholder="Search..." required />
             <button type="submit">Search</button>
@@ -124,7 +147,6 @@
                 resultsDiv.innerHTML = "";
 
                 results.forEach(item => {
-
                     const card = document.createElement("div");
                     card.className = "card";
 

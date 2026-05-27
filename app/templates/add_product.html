@@ -2,281 +2,109 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>company</title>
+    <title>Company</title>
 
     <style>
         body {
             margin: 0;
-            font-family: 'Cairo', Arial, sans-serif;
-            color: #e2e8f0;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0b1e44 0%, #111f4f 40%, #051026 100%);
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 260px;
-            background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.95) 100%);
-            box-shadow: 10px 0 80px rgba(0, 0, 0, 0.3);
-            z-index: -2;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.18), transparent 25%),
-                radial-gradient(circle at 85% 10%, rgba(14, 165, 233, 0.14), transparent 18%),
-                radial-gradient(circle at 55% 80%, rgba(59, 130, 246, 0.10), transparent 22%);
-            pointer-events: none;
-            z-index: -1;
+            font-family: Arial, sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
         }
 
         header {
-            background: rgba(8, 17, 40, 0.96);
-            padding: 24px 22px;
-            text-align: center;
-            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
         }
 
         header h2 {
             margin: 0;
-            color: #f8fafc;
-            font-size: 26px;
-            letter-spacing: 0.3px;
+            font-size: 20px;
+            color: #ddd;
         }
 
-        .content {
-            padding: 34px 24px 120px;
-            max-width: 1100px;
-            margin: 0 auto;
+        .container {
+            width: 100%;
+            max-width: 500px;
         }
 
-        .title {
-            color: #f8fafc;
-            margin-bottom: 10px;
-            font-size: 34px;
-            font-weight: 700;
-            letter-spacing: 0.3px;
+        h1 {
+            font-size: 22px;
+            margin-bottom: 20px;
         }
 
-        .subtitle {
-            color: #94a3b8;
-            margin-bottom: 24px;
-            font-size: 15px;
-            line-height: 1.65;
-        }
-
-        .form-card {
-            background: rgba(8, 17, 40, 0.94);
-            border: 1px solid rgba(96, 165, 250, 0.18);
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(18px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .form-card::before {
-            content: '';
-            position: absolute;
-            top: -28px;
-            right: -28px;
-            width: 220px;
-            height: 220px;
-            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.18), transparent 55%);
-            pointer-events: none;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-
-        .form-group {
+        form {
             display: flex;
             flex-direction: column;
-            text-align: right;
             gap: 12px;
-            margin-bottom: 12px;
         }
 
         label {
-            margin-bottom: 4px;
-            color: #94a3b8;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            color: #aaa;
         }
 
-        input,
-        textarea,
-        select {
-            width: 80%;
-            background: rgba(15, 23, 42, 0.96);
-            color: #e2e8f0;
-            border: 1px solid rgba(100, 116, 139, 0.35);
-            border-radius: 16px;
-            padding: 14px 16px;
-            font-size: 15px;
-            transition: all 0.25s ease;
+        input {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #2a2a2a;
+            background-color: #1a1a1a;
+            color: #fff;
             outline: none;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
-            text-align: right;
-            direction: rtl;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 100%);
-            background-repeat: no-repeat;
-            background-position: right 14px center;
+            font-size: 14px;
         }
 
-        input::placeholder,
-        textarea::placeholder {
-            color: #94a3b8;
-            opacity: 1;
+        input:focus {
+            border-color: #444;
         }
 
-        input::-webkit-inner-spin-button,
-        input::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: #60a5fa;
-            box-shadow: 0 0 18px rgba(56, 189, 248, 0.22);
-            background: rgba(15, 23, 42, 1);
-        }
-
-        input[readonly],
-        input[disabled],
-        textarea[readonly],
-        textarea[disabled],
-        select[disabled] {
-            background: rgba(15, 23, 42, 0.82);
-            border-color: rgba(100, 116, 139, 0.2);
-            color: #a1acb9;
-            cursor: not-allowed;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .row-span {
-            grid-column: span 2;
-        }
-
-        .summary {
-            margin-top: 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        .summary .form-group {
-            margin-bottom: 0;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: fit-content;
-            background: linear-gradient(90deg, #38bdf8, #60a5fa);
-            color: #0b1120;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 999px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 700;
-            transition: all 0.25s ease;
-            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.18);
+        button {
             margin-top: 10px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2a2a2a;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
         }
 
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 22px 52px rgba(37, 99, 235, 0.24);
-        }
-
-        footer {
-            background: rgba(8, 17, 40, 0.96);
-            text-align: center;
-            padding: 18px 12px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            color: #94a3b8;
-            box-shadow: 0 -2px 22px rgba(0, 0, 0, 0.25);
-        }
-
-        @media (max-width: 760px) {
-            .summary {
-                grid-template-columns: 1fr;
-            }
-
-            .row-span {
-                grid-column: span 1;
-            }
-
-            .content {
-                padding: 24px 18px 120px;
-            }
+        button:hover {
+            background-color: #3a3a3a;
         }
     </style>
 </head>
 
 <body>
+
     <header>
-        <h2>company name</h2>
+        <h2>Company Name</h2>
     </header>
 
-    <div class="content">
-        <h1 class="title">Add Product</h1>
+    <div class="container">
+        <h1>Add Product</h1>
 
-        <div class="form-card">
-            <form id="receipt-form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="name">Product name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter product name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="national-id">description</label>
-                        <input type="text" id="national-id" name="description" placeholder="Enter description" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="unit-price">price</label>
-                        <input type="number" id="unit-price" name="price" step="0.01" min="0" placeholder="0.00" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">category</label>
-                        <input type="text" id="quantity" name="category" placeholder="Enter category" required />
-                    </div>
-                </div>
+        <form id="receipt-form">
+            <label>Product name</label>
+            <input type="text" name="name" placeholder="Enter product name" required />
 
-                <button type="submit" class="btn">Save</button>
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Enter description" required />
 
-            </form>
-        </div>
+            <label>Price</label>
+            <input type="number" name="price" step="0.01" min="0" placeholder="0.00" required />
+
+            <label>Category</label>
+            <input type="text" name="category" placeholder="Enter category" required />
+
+            <button type="submit">Save</button>
+        </form>
     </div>
-
 
     <script>
         async function submitReceiptForm(event) {
@@ -298,13 +126,17 @@
                     },
                     body: JSON.stringify(data)
                 });
+
                 alert('Product added successfully!');
                 form.reset();
             } catch (error) {
-                alert('Failed to submit the form to the backend');
+                alert('Failed to submit the form');
             }
         }
-        document.getElementById('receipt-form').addEventListener('submit', submitReceiptForm);
+
+        document.getElementById('receipt-form')
+            .addEventListener('submit', submitReceiptForm);
     </script>
+
 </body>
 </html>
